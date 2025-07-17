@@ -37,6 +37,30 @@
   <canvas id="sackChart" width="400" height="200"></canvas>
   <h2 id="earnings">Earning: $0.00 since you opened this page</h2>
 
+  <label for="speedControl">Speed Multiplier:</label>
+  <select id="speedControl" onchange="updateSpeed()">
+    <option value="1">1x (Real Time)</option>
+    <option value="10">10x</option>
+    <option value="50">50x</option>
+    <option value="100" selected>100x</option>
+    <option value="500">500x</option>
+    <option value="1000">1000x</option>
+    <option value="1000">10000x</option>
+    <option value="1000">100000x</option>
+  </select>
+
+  <!-- Controls -->
+<div style="margin-bottom: 1rem;">
+  <button onclick="startEarnings()">▶️ Start</button>
+  <button onclick="stopEarnings()">⏸ Stop</button>
+  <button onclick="resetEarnings()">🔄 Reset</button>
+</div>
+
+<!-- Progress Bar -->
+<div style="width: 80%; margin: 0 auto; background-color: #444; height: 30px; border-radius: 15px;">
+  <div id="progress-bar" style="height: 100%; width: 0%; background-color: #f5c518; border-radius: 15px;"></div>
+</div>
+
   <script>
     // chart.js configuration for T.J. Watt's sacks per season 
     const ctx = document.getElementById('sackChart').getContext('2d');
@@ -71,28 +95,65 @@
     });
 
     // Real-time earnings ticker
-    const earningsPerSecond = 1.30;
     const maxEarnings = 110902038;
     let currentEarnings = 0;
-    let earningsInterval;
+    let earningsInterval = null;
 
-    // Speed factor: updates every 100ms and adds 1.30 * 10 per second
     const intervalMs = 100;
-    const perTickEarnings = earningsPerSecond * (1000 / intervalMs);
+    let earningsPerSecond = 1.30;
+    let speedMultiplier = 100;
+
+    function getPerTickEarnings() {
+      return earningsPerSecond * speedMultiplier * (intervalMs / 1000);
+    }
 
     function updateEarningsRealistically() {
       if (currentEarnings >= maxEarnings) {
+        currentEarnings = maxEarnings;
         document.getElementById("earnings").innerText = `Total Career Earnings: $${maxEarnings.toLocaleString()}`;
-        clearInterval(earningsInterval); // Stop the counter
+        updateProgressBar(100);
+        clearInterval(earningsInterval);
+        earningsInterval = null;
         return;
       }
 
-      currentEarnings += earningsPerSecond;
+      currentEarnings += getPerTickEarnings();
+      const percent = Math.min((currentEarnings / maxEarnings) * 100, 100);
       const formatted = currentEarnings.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+
       document.getElementById("earnings").innerText = `Earning: $${formatted} since you opened this page`;
+      updateProgressBar(percent);
     }
 
-    earningsInterval = setInterval(updateEarningsRealistically, 1000);
+    function updateProgressBar(percent) {
+      const bar = document.getElementById("progress-bar");
+      bar.style.width = `${percent}%`;
+    }
+
+    // Controls
+    function startEarnings() {
+      if (!earningsInterval) {
+        earningsInterval = setInterval(updateEarningsRealistically, intervalMs);
+      }
+    }
+
+    function stopEarnings() {
+      clearInterval(earningsInterval);
+      earningsInterval = null;
+    }
+
+    function resetEarnings() {
+      stopEarnings();
+      currentEarnings = 0;
+      document.getElementById("earnings").innerText = `Earning: $0.00 since you opened this page`;
+      updateProgressBar(0);
+    }
+
+    // Speed change handler
+    function updateSpeed() {
+      const selected = document.getElementById("speedControl").value;
+      speedMultiplier = parseInt(selected);
+    }
 
   </script>
 </body>

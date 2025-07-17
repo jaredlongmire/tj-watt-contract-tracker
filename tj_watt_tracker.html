@@ -37,7 +37,7 @@
   <canvas id="sackChart" width="400" height="200"></canvas>
   <h2 id="earnings">Career Earnings: $0.00 Press Start You Little Pocket Watchers!!!</h2>
 
-  <label for="speedControl">Speed Multiplier:</label>
+  <!-- <label for="speedControl">Speed Multiplier:</label>
   <select id="speedControl" onchange="updateSpeed()">
     <option value="1">1x (Real Time)</option>
     <option value="10">10x</option>
@@ -47,7 +47,7 @@
     <option value="1000">1000x</option>
     <option value="1000">10000x</option>
     <option value="1000">100000x</option>
-  </select>
+  </select> -->
 
   <!-- Controls -->
 <div style="margin-bottom: 1rem;">
@@ -118,7 +118,7 @@
         maximumFractionDigits: 0
       });
 
-      document.getElementById("earnings").innerText = `Earning: $${formatted} since you opened this page`;
+      document.getElementById("earnings").innerText = `Earning: $${formatted} Here We Go Steelers!!!, Here We Go!!!`;
       updateProgressBar(percent);
     }
 
@@ -137,7 +137,7 @@
     function resetEarnings() {
       stopEarnings();
       currentEarnings = 0;
-      document.getElementById("earnings").innerText = `Earning: $0 since you opened this page`;
+      document.getElementById("earnings").innerText = `Why did you stop? Press Start You Little Pocket Watchers!!!`;
       updateProgressBar(0);
     }
 

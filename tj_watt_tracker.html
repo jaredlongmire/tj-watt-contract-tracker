@@ -35,7 +35,7 @@
   <p>Average Annual Salary: <strong>$41M</strong></p>
   <p>Sacks Per Season Breakdown</p>
   <canvas id="sackChart" width="400" height="200"></canvas>
-  <h2 id="earnings">Earning: $0.00 since you opened this page</h2>
+  <h2 id="earnings">Career Earnings: $0.00 Press Start You Little Pocket Watchers!!!</h2>
 
   <label for="speedControl">Speed Multiplier:</label>
   <select id="speedControl" onchange="updateSpeed()">
@@ -95,19 +95,13 @@
     });
 
     // Real-time earnings ticker
-    const maxEarnings = 110902038;
+    const maxEarnings = 110000000;
+    const increment = 1000000; // $1M per tick
+    const intervalMs = 1000;   // 1 second per tick
     let currentEarnings = 0;
     let earningsInterval = null;
 
-    const intervalMs = 100;
-    let earningsPerSecond = 1.30;
-    let speedMultiplier = 100;
-
-    function getPerTickEarnings() {
-      return earningsPerSecond * speedMultiplier * (intervalMs / 1000);
-    }
-
-    function updateEarningsRealistically() {
+    function updateEarningsMillionSteps() {
       if (currentEarnings >= maxEarnings) {
         currentEarnings = maxEarnings;
         document.getElementById("earnings").innerText = `Total Career Earnings: $${maxEarnings.toLocaleString()}`;
@@ -117,23 +111,21 @@
         return;
       }
 
-      currentEarnings += getPerTickEarnings();
+      currentEarnings += increment;
       const percent = Math.min((currentEarnings / maxEarnings) * 100, 100);
-      const formatted = currentEarnings.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      const formatted = currentEarnings.toLocaleString(undefined, {
+        minimumFractionDigits: 0,
+        maximumFractionDigits: 0
+      });
 
       document.getElementById("earnings").innerText = `Earning: $${formatted} since you opened this page`;
       updateProgressBar(percent);
     }
 
-    function updateProgressBar(percent) {
-      const bar = document.getElementById("progress-bar");
-      bar.style.width = `${percent}%`;
-    }
-
-    // Controls
+    // Start / Stop / Reset buttons
     function startEarnings() {
       if (!earningsInterval) {
-        earningsInterval = setInterval(updateEarningsRealistically, intervalMs);
+        earningsInterval = setInterval(updateEarningsMillionSteps, intervalMs);
       }
     }
 
@@ -145,14 +137,13 @@
     function resetEarnings() {
       stopEarnings();
       currentEarnings = 0;
-      document.getElementById("earnings").innerText = `Earning: $0.00 since you opened this page`;
+      document.getElementById("earnings").innerText = `Earning: $0 since you opened this page`;
       updateProgressBar(0);
     }
 
-    // Speed change handler
-    function updateSpeed() {
-      const selected = document.getElementById("speedControl").value;
-      speedMultiplier = parseInt(selected);
+    function updateProgressBar(percent) {
+      const bar = document.getElementById("progress-bar");
+      bar.style.width = `${percent}%`;
     }
 
   </script>

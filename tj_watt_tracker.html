@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>T.J. Watt Contract Tracker</title>
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #000;
+      color: #f5c518;
+      margin: 0;
+      padding: 2rem;
+      text-align: center;
+    }
+    h1 {
+      font-size: 2.5rem;
+      margin-bottom: 0.5rem;
+    }
+    p {
+      font-size: 1.25rem;
+    }
+    canvas {
+      margin-top: 2rem;
+      background-color: #fff;
+      border-radius: 8px;
+      padding: 1rem;
+    }
+  </style>
+</head>
+<body>
+  <h1>T.J. Watt Contract Tracker</h1>
+  <p><strong>3 Years · $123 Million</strong></p>
+  <p>Average Annual Salary: <strong>$41M</strong></p>
+  <p>Sacks Per Season Breakdown</p>
+  <canvas id="sackChart" width="400" height="200"></canvas>
+
+  <script>
+    const ctx = document.getElementById('sackChart').getContext('2d');
+    const sackChart = new Chart(ctx, {
+      type: 'bar',
+      data: {
+        labels: ['2020', '2021', '2022', '2023'],
+        datasets: [{
+          label: 'Sacks',
+          data: [15, 22.5, 10.5, 19],
+          backgroundColor: '#f5c518'
+        }]
+      },
+      options: {
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: { color: '#000' },
+            grid: { color: '#ccc' }
+          },
+          x: {
+            ticks: { color: '#000' },
+            grid: { color: '#ccc' }
+          }
+        },
+        plugins: {
+          legend: {
+            labels: { color: '#000' }
+          }
+        }
+      }
+    });
+  </script>
+</body>
+</html>

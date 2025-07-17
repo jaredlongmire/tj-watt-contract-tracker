@@ -71,15 +71,29 @@
     });
 
     // Real-time earnings ticker
-    let earningsPerSecond = 1.30;
-    let seconds = 0;
-    function updateEarnings() {
-      seconds += 1;
-      let total = (seconds * earningsPerSecond).toFixed(2);
-      document.getElementById("earnings").innerText = `Earning: $${total} since you opened this page`;
+    const earningsPerSecond = 1.30;
+    const maxEarnings = 110902038;
+    let currentEarnings = 0;
+    let earningsInterval;
+
+    // Speed factor: updates every 100ms and adds 1.30 * 10 per second
+    const intervalMs = 100;
+    const perTickEarnings = earningsPerSecond * (1000 / intervalMs);
+
+    function updateEarningsRealistically() {
+      if (currentEarnings >= maxEarnings) {
+        document.getElementById("earnings").innerText = `Total Career Earnings: $${maxEarnings.toLocaleString()}`;
+        clearInterval(earningsInterval); // Stop the counter
+        return;
+      }
+
+      currentEarnings += earningsPerSecond;
+      const formatted = currentEarnings.toLocaleString(undefined, { minimumFractionDigits: 2, maximumFractionDigits: 2 });
+      document.getElementById("earnings").innerText = `Earning: $${formatted} since you opened this page`;
     }
-    setInterval(updateEarnings, 1000);
-    
+
+    earningsInterval = setInterval(updateEarningsRealistically, 1000);
+
   </script>
 </body>
 </html>

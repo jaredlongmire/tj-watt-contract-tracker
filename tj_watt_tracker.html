@@ -35,8 +35,10 @@
   <p>Average Annual Salary: <strong>$41M</strong></p>
   <p>Sacks Per Season Breakdown</p>
   <canvas id="sackChart" width="400" height="200"></canvas>
+  <h2 id="earnings">Earning: $0.00 since you opened this page</h2>
 
   <script>
+    // chart.js configuration for T.J. Watt's sacks per season 
     const ctx = document.getElementById('sackChart').getContext('2d');
     const sackChart = new Chart(ctx, {
       type: 'bar',
@@ -67,6 +69,17 @@
         }
       }
     });
+
+    // Real-time earnings ticker
+    let earningsPerSecond = 1.30;
+    let seconds = 0;
+    function updateEarnings() {
+      seconds += 1;
+      let total = (seconds * earningsPerSecond).toFixed(2);
+      document.getElementById("earnings").innerText = `Earning: $${total} since you opened this page`;
+    }
+    setInterval(updateEarnings, 1000);
+    
   </script>
 </body>
 </html>

@@ -27,29 +27,34 @@
       border-radius: 8px;
       padding: 1rem;
     }
+    img {
+        width: 200px;
+        height: auto;
+        object-fit: cover;
+        border-radius: 10px;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.6);
+    }
+
+    img:hover {
+      transform: scale(1.05);
+    }
   </style>
 </head>
 <body>
   <h1>T.J. Watt Contract Tracker</h1>
+  <!-- TJ Watt Steelers Images -->
+  <div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;">
+    <img src="images/tj_watt.jpg" alt="Watt pic 1" width="200">
+    <img src="images/tj_watt_1.png" alt="Watt pic 2" width="200">
+    <img src="images/tj_watt_2.png" alt="Watt pic 3" width="200">
+  </div>
   <p><strong>3 Years · $123 Million</strong></p>
   <p>Average Annual Salary: <strong>$41M</strong></p>
   <p>Sacks Per Season Breakdown</p>
-  <canvas id="sackChart" width="400" height="200"></canvas>
+
   <h2 id="earnings">Career Earnings: $0.00 Press Start You Little Pocket Watchers!!!</h2>
 
-  <!-- <label for="speedControl">Speed Multiplier:</label>
-  <select id="speedControl" onchange="updateSpeed()">
-    <option value="1">1x (Real Time)</option>
-    <option value="10">10x</option>
-    <option value="50">50x</option>
-    <option value="100" selected>100x</option>
-    <option value="500">500x</option>
-    <option value="1000">1000x</option>
-    <option value="1000">10000x</option>
-    <option value="1000">100000x</option>
-  </select> -->
-
-  <!-- Controls -->
+ <!-- Controls -->
 <div style="margin-bottom: 1rem;">
   <button onclick="startEarnings()">▶️ Start</button>
   <button onclick="stopEarnings()">⏸ Stop</button>
@@ -60,6 +65,16 @@
 <div style="width: 80%; margin: 0 auto; background-color: #444; height: 30px; border-radius: 15px;">
   <div id="progress-bar" style="height: 100%; width: 0%; background-color: #f5c518; border-radius: 15px;"></div>
 </div>
+
+<canvas id="sackChart" width="400" height="200"></canvas>
+
+<!-- Highlight Reel -->
+<iframe width="560" height="315"
+  src="https://www.youtube.com/embed/YIwneo0xSe0"
+  title="T.J. Watt 2024 Highlights" frameborder="0"
+  allowfullscreen
+  style="margin-top: 40px;">
+</iframe>
 
   <script>
     // chart.js configuration for T.J. Watt's sacks per season 

@@ -42,12 +42,13 @@
 </head>
 <body>
   <h1>T.J. Watt Contract Tracker</h1>
-  <!-- TJ Watt Steelers Images -->
-  <div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;">
-    <img src="images/tj_watt.jpg" alt="Watt pic 1" width="200">
-    <img src="images/tj_watt_1.png" alt="Watt pic 2" width="200">
-    <img src="images/tj_watt_2.png" alt="Watt pic 3" width="200">
-  </div>
+  <!-- TJ Watt contract breakdown -->
+<iframe width="560" height="315"
+  src="https://www.youtube.com/embed/aHSlJFFmSgc"
+  title="T.J. Watt 2024 Highlights" frameborder="0"
+  allowfullscreen
+  style="margin-top: 40px;">
+</iframe>
   <p><strong>3 Years - $123 Million</strong></p>
   <p>Average Annual Salary: <strong>$41M</strong></p>
   <p>Sacks Per Season Breakdown</p>
@@ -68,13 +69,12 @@
 
 <canvas id="sackChart" width="400" height="200"></canvas>
 
-<!-- TJ Watt contract breakdown Reel -->
-<iframe width="560" height="315"
-  src="https://www.youtube.com/embed/aHSlJFFmSgc"
-  title="T.J. Watt 2024 Highlights" frameborder="0"
-  allowfullscreen
-  style="margin-top: 40px;">
-</iframe>
+  <!-- TJ Watt Steelers Images -->
+  <div style="display: flex; justify-content: center; gap: 10px; margin: 20px 0;">
+    <img src="images/tj_watt.jpg" alt="Watt pic 1" width="200">
+    <img src="images/tj_watt_1.png" alt="Watt pic 2" width="200">
+    <img src="images/tj_watt_2.png" alt="Watt pic 3" width="200">
+  </div>
 
   <script>
     // chart.js configuration for T.J. Watt's sacks per season 
@@ -82,10 +82,10 @@
     const sackChart = new Chart(ctx, {
       type: 'bar',
       data: {
-        labels: ['2020', '2021', '2022', '2023'],
+        labels: ['2020', '2021', '2022', '2023', '2024'],
         datasets: [{
           label: 'Sacks',
-          data: [15, 22.5, 10.5, 19],
+          data: [15, 22.5, 10.5, 19, 11.5],
           backgroundColor: '#f5c518'
         }]
       },
